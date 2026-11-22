@@ -1,0 +1,35 @@
+services:
+  # SyncWrite Monolithic Web Service (Express API + Socket.IO + React SPA)
+  - type: web
+    name: syncwrite
+    runtime: node
+    plan: free # Change to 'starter' if you want a persistent disk and no spin-down on inactivity
+    region: oregon # or frankfurt, ohio, singapore
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 22.14.0
+      - key: NODE_ENV
+        value: production
+      - key: JWT_ACCESS_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: JWT_ACCESS_EXPIRY
+        value: 1h
+      - key: JWT_REFRESH_EXPIRY
+        value: 7d
+      # Leave DATA_DIR and PROJECTS_DIR empty for default ephemeral data directory on free plan
+      # If using Starter plan with a disk:
+      # - key: DATA_DIR
+      #   value: /var/data
+      # - key: PROJECTS_DIR
+      #   value: /var/data/projects
+
+    # Uncomment disk section below if deploying on a paid Render plan (Starter $7/mo)
+    # disk:
+    #   name: syncwrite-data
+    #   mountPath: /var/data
+    #   sizeGB: 1

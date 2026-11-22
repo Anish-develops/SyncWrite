@@ -1,0 +1,25 @@
+{
+  "name": "syncwrite",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Collaborative code editor with AI intelligence, CRDT sync, and terminal execution",
+  "workspaces": [
+    "shared",
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -p \"[{name}]\" -n \"SERVER,CLIENT\" -c \"yellow.bold,cyan.bold\" \"npm run dev -w server\" \"npm run dev -w client\"",
+    "build": "npm run build -w shared && npm run build -w client && npm run build -w server",
+    "start": "npm run start -w server",
+    "test": "npm run test -w server",
+    "clean": "npm run clean -w client && npm run clean -w server && npm run clean -w shared"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "typescript": "^5.4.5"
+  }
+}

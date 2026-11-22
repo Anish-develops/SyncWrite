@@ -1,0 +1,19 @@
+services:
+  syncwrite:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: syncwrite-app
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./projects:/app/projects
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - DATA_DIR=/app/data
+      - PROJECTS_DIR=/app/projects
