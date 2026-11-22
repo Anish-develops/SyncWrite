@@ -2,11 +2,10 @@ services:
   # SyncWrite Monolithic Web Service (Express API + Socket.IO + React SPA)
   - type: web
     name: syncwrite
-    runtime: node
+    runtime: docker
+    dockerfilePath: ./Dockerfile
     plan: free # Change to 'starter' if you want a persistent disk and no spin-down on inactivity
     region: oregon # or frankfurt, ohio, singapore
-    buildCommand: npm install && npm run build
-    startCommand: npm start
     healthCheckPath: /api/health
     envVars:
       - key: NODE_VERSION

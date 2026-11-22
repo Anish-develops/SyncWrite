@@ -10,6 +10,13 @@ import aiRoutes from './ai.routes';
 
 const router = Router();
 
+router.get('/health', (_req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    service: 'syncwrite',
+  });
+});
+
 router.use('/auth', authRoutes);
 router.use('/projects', projectRoutes);
 router.use('/projects', fileRoutes);

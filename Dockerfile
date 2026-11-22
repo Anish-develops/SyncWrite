@@ -1,4 +1,4 @@
-FROM node:20-bookworm-slim
+FROM node:22.14.0-bookworm-slim
 
 # Install system dependencies and compiler runtimes
 RUN apt-get update && apt-get install -y --no-install-recommends \
